@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/Users/hamza/IdeaProjects/TAF"><classes><class name="com.atrify.taf.ApiTests"><methods><include name="get_all_users"/><include name="get_single_user"/><include name="create_new_user"/><include name="update_existing_user"/><include name="delete_a_user"/></methods></class></classes></test></suite>
