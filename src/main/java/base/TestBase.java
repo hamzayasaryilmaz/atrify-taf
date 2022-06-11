@@ -14,9 +14,7 @@ public class TestBase {
     @BeforeSuite
     public void beforeSuite() {
         PropertiesHelper.loadPropertiesFile("config.properties");
-
         RestAssured.baseURI = PropertiesHelper.prop.getProperty("application.baseURI");
-        ;
         RestAssured.basePath = PropertiesHelper.prop.getProperty("application.basePath");
     }
 

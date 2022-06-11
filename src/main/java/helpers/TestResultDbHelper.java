@@ -34,18 +34,18 @@ public class TestResultDbHelper {
     }
 
     public static void recordTestResult(ITestResult result) throws SQLException {
-        String testResultStatus = TestResultDbHelper.getTestResultStatus(result.getStatus());
+        boolean existed = false;
         int failureCounter = 0;
+        String testResultStatus = TestResultDbHelper.getTestResultStatus(result.getStatus());
+        int counter = !testResultStatus.equals("Success") ? (failureCounter + 1) : failureCounter;
 
         String sql = "SELECT * FROM test_result WHERE name = '" + result.getName() + "'";
         ResultSet resultSet = DB.executeQuery(sql);
-        boolean existed = false;
         while (resultSet.next()) {
             existed = true;
             failureCounter = resultSet.getInt("failure_counter");
         }
 
-        int counter = !testResultStatus.equals("Success") ? (failureCounter + 1) : failureCounter;
         if (existed) {
             String updateSql = "UPDATE test_result\n" +
                     "SET status = '" + testResultStatus

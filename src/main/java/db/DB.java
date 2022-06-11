@@ -11,7 +11,7 @@ public class DB {
     public synchronized static void connect() {
         try {
             String dbName = PropertiesHelper.prop.getProperty("db.name");
-            String jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + "\\src\\main\\resources\\db/" + dbName;
+            String jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + "\\src\\main\\resources\\db/" + dbName + ";AUTO_SERVER=TRUE";
             String username = PropertiesHelper.prop.getProperty("db.username");
             String password = PropertiesHelper.prop.getProperty("db.password");
             connection = DriverManager.getConnection(jdbcURL, username, password);
