@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="methods" thread-count="10">
+<suite name="All Test Suite" parallel="methods" thread-count="10" verbose="2">
     <test verbose="2" name="atrify-taf">
         <classes>
             <class name="com.atrify.taf.ApiTests">
                 <methods>
-                    <include name="get_all_users_test"/>
+                    <include name="getAllUsersTest"/>
                     <include name="database_connection_test"/>
                     <include name="database_connection_test2"/>
                     <include name="database_connection_test3"/>

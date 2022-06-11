@@ -5,13 +5,16 @@ import helpers.PropertiesHelper;
 import java.sql.*;
 
 public class DB {
+    //
+    private static String s = System.getProperty("file.separator");
     private static Connection connection = null;
     private static ResultSet resultSet = null;
 
     public synchronized static void connect() {
         try {
+            String jdbcPath = s + "src" + s + "main" + s + "resources" + s + "db";
             String dbName = PropertiesHelper.prop.getProperty("db.name");
-            String jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + "\\src\\main\\resources\\db/" + dbName + ";AUTO_SERVER=TRUE";
+            String jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + jdbcPath + "/" + dbName + ";AUTO_SERVER=TRUE";
             String username = PropertiesHelper.prop.getProperty("db.username");
             String password = PropertiesHelper.prop.getProperty("db.password");
             connection = DriverManager.getConnection(jdbcURL, username, password);

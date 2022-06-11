@@ -37,7 +37,6 @@ public class TestResultDbHelper {
         boolean existed = false;
         int failureCounter = 0;
         String testResultStatus = TestResultDbHelper.getTestResultStatus(result.getStatus());
-        int counter = !testResultStatus.equals("Success") ? (failureCounter + 1) : failureCounter;
 
         String sql = "SELECT * FROM test_result WHERE name = '" + result.getName() + "'";
         ResultSet resultSet = DB.executeQuery(sql);
@@ -45,6 +44,8 @@ public class TestResultDbHelper {
             existed = true;
             failureCounter = resultSet.getInt("failure_counter");
         }
+
+        int counter = !testResultStatus.equals("Success") ? (failureCounter + 1) : failureCounter;
 
         if (existed) {
             String updateSql = "UPDATE test_result\n" +
