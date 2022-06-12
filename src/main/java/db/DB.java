@@ -12,9 +12,13 @@ public class DB {
 
     public synchronized static void connect() {
         try {
+            String jdbcURL = "";
             String jdbcPath = s + "src" + s + "main" + s + "resources" + s + "db";
             String dbName = PropertiesHelper.prop.getProperty("db.name");
-            String jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + jdbcPath + "/" + dbName + ";AUTO_SERVER=TRUE";
+            if (PropertiesHelper.prop.getProperty("db.url").isEmpty())
+                jdbcURL = "jdbc:h2:" + System.getProperty("user.dir") + jdbcPath + "/" + dbName + ";AUTO_SERVER=TRUE";
+            else
+                jdbcURL = PropertiesHelper.prop.getProperty("db.url");
             String username = PropertiesHelper.prop.getProperty("db.username");
             String password = PropertiesHelper.prop.getProperty("db.password");
             connection = DriverManager.getConnection(jdbcURL, username, password);

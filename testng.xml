@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="methods" thread-count="10" verbose="2">
-    <test verbose="2" name="atrify-taf">
+<suite name="All Test Suite" parallel="methods" thread-count="20">
+    <test name="pagonxt-taf">
         <classes>
-            <class name="com.atrify.taf.ApiTests">
+            <class name="com.pagonxt.taf.ApiTests">
                 <methods>
-                    <include name="getAllUsersTest"/>
-                    <include name="database_connection_test"/>
-                    <include name="database_connection_test2"/>
-                    <include name="database_connection_test3"/>
+                    <include name="get_all_users_test"/>
+                    <include name="get_all_users_with_non_existed_page_test"/>
+                    <include name="calculate_all_users_in_total_test"/>
                     <include name="get_single_user_test"/>
                     <include name="create_a_user_test"/>
                     <include name="update_a_user_test"/>
                     <include name="delete_a_user_test"/>
+                </methods>
+            </class>
+            <class name="com.pagonxt.taf.DbTests">
+                <methods>
+                    <include name="get_test_result_test"/>
                 </methods>
             </class>
         </classes>

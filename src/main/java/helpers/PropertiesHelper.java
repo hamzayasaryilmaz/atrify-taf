@@ -1,8 +1,12 @@
 package helpers;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class PropertiesHelper {
     public static Properties prop = null;
@@ -16,5 +20,14 @@ public class PropertiesHelper {
                 System.err.println("Unable to load properties file : " + filePath);
             }
         }
+    }
+
+    public static void writeAllureEnvironmentProperties() {
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("base uri", PropertiesHelper.prop.getProperty("application.baseURI"))
+                        .put("base path", PropertiesHelper.prop.getProperty("application.basePath"))
+                        .put("database name", PropertiesHelper.prop.getProperty("db.name"))
+                        .build(), System.getProperty("user.dir") + "/target/allure-results/");
     }
 }

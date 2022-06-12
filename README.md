@@ -26,7 +26,7 @@ This is a test automation framework written for API tests
 ---
 
 ## How to Run Tests
-## 1. Step
+## 1. Step (Can be skipped, since database JDBC url has suffix 'AUTO_SERVER=TRUE' explaind on second step)
 Before running the tests, H2 database should be up and running
 * Download the H2 Database [H2 Database Jar File](https://search.maven.org/remotecontent?filepath=com/h2database/h2/2.1.212/h2-2.1.212.jar)
 * Navigate to directory where the jar file is located
@@ -38,9 +38,9 @@ Before running the tests, H2 database should be up and running
 ## 2. Step
 H2 Console will be automatically opened<br />
 Please change the JDBC url to the path where the database will be located<br />
-(For this project it is located at: src/main/resources/db/Atrify.mv.db)
+(For this project it is located at: src/main/resources/db/PagoNxtTest.mv.db)
 It should be like:
-* jdbc:h2:tcp://localhost/C:\Users\{user name}\IdeaProjects\atrify-taf\src\main\resources\db/Atrify;AUTO_SERVER=TRUE<br />
+* jdbc:h2:tcp://localhost/C:\Users\{user name}\IdeaProjects\pagonxt-taf\src\main\resources\db/PagoNxtTest;AUTO_SERVER=TRUE<br />
   "AUTO_SERVER=TRUE" is for multiple processes can access the same database without having to start the server manually
 
 

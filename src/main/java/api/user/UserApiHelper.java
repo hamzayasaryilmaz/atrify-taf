@@ -2,53 +2,54 @@ package api.user;
 
 import api.user.models.*;
 import io.qameta.allure.Step;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
 public class UserApiHelper {
-    @Step("Get all users")
-    public static UserList getAllUsers(int page) {
-        return when().
-                get("/users?page={0}", page).
+    public static UserList getAllUsers() {
+        return getAllUsers(0, 12);
+    }
+
+    @Step("Get all users with page #{0} and user per page: {1}")
+    public static UserList getAllUsers(int page, int perPage) {
+        return given().
+                queryParam("page", page).
+                queryParam("perPage", perPage).
+                when().
+                get("/users").
                 as(UserList.class);
     }
 
     @Step("Get single user by id: {0}")
-    public static UserData getSingleUserById(String id) {
-        return when().
-                get("/users/{0}", id).
-                as(SingleUser.class).getData();
+    public static Response getSingleUserById(String id) {
+        return given().
+                pathParam("id", id).
+                when().
+                get("/users/{id}").thenReturn();
     }
 
     @Step("Delete user by id: {0}")
-    public static void deleteUserById(String userId) {
-        when().
+    public static Response deleteUserById(String userId) {
+        return when().
                 delete("/users/{0}", userId).
-                then().
-                statusCode(204);
+                thenReturn();
     }
 
     @Step("Update user by id: {0} to {1}")
-    public static UserPutResponse updateUser(String userId, UserPost userPost) {
-        return given().
+    public static Response updateUser(String userId, UserPost userPost) {
+        return given().pathParam("id", "").
                 header("Content-type", "application/json").
                 body(userPost).
-                put("/users/{0}", userId).
-                then().
-                statusCode(200).extract().response().as(UserPutResponse.class);
+                put("/users/{id}").thenReturn();
     }
 
     @Step("Create user as: {0}")
-    public static UserPostResponse createUser(UserPost userPost) {
+    public static Response createUser(UserPost userPost) {
         return given().
                 header("Content-type", "application/json").
                 body(userPost).
-                post("/users").
-                then().
-                statusCode(201).
-                extract().
-                response().
-                as(UserPostResponse.class);
+                post("/users").thenReturn();
     }
 }
